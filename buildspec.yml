@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - IMAGE_NAME="xxx"
+      - AWS_ACCOUNT_ID="114563593725"
+      - AWS_REGION="ap-northeast-2"
+      - ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+      - aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${ECR_URI}
+      - COMMIT_ID=${CODEBUILD_RESOLVED_SOURCE_VERSION:0:8}
+      - IMAGE_TAG=${COMMIT_ID}-$(date '+%Y%m%d_%H%M%S')
+
+  build:
+    commands:
+      - docker build --force-rm -t build/${IMAGE_NAME} .
+      - docker tag build/${IMAGE_NAME} ${ECR_URI}/${IMAGE_NAME}:${IMAGE_TAG}
+      - docker tag build/${IMAGE_NAME} ${ECR_URI}/${IMAGE_NAME}:latest
+
+  post_build:
+    commands:
+      - docker push ${ECR_URI}/${IMAGE_NAME}:${IMAGE_TAG}
+      - docker rmi ${ECR_URI}/${IMAGE_NAME}:${IMAGE_TAG}
+      - docker push ${ECR_URI}/${IMAGE_NAME}:latest
+      - docker rmi ${ECR_URI}/${IMAGE_NAME}:latest

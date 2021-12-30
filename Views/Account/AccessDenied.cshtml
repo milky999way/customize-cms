@@ -1,0 +1,62 @@
+@*
+  For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+  //var auth = ViewData["authxxxInfo"] as xxx.Models.LoginInformation;
+  //var auth = ViewData["authxxxInfo"];
+}
+
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+  <title>403 (Forbidden)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+
+  <link rel="stylesheet" media="all" href="/errors/css/common.css">
+  <script src="/errors/js/jquery-1.11.3.min.js"></script>
+  <script>
+    var isMobile = 'ontouchstart' in window || navigator.maxTouchPoints;    //터치디바이스 체크
+    $(function () {
+      $("#viewport").animate({ opacity: 1 }, 200);
+      //화면 리사이즈
+      if (isMobile) {
+        var getWidth = $(window).width();
+        var getRatio = getWidth / 670;
+        if (getRatio < 1) {
+          pageRatio = getRatio;
+          $('head').append('<meta name="viewport" content="width=device-width, initial-scale=' + getRatio + ', minimum-scale=' + getRatio + ', maximum-scale=' + getRatio + ', user-scalable=no, target-densitydpi=device-dpi">');
+        }
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewport">
+    <div class="error_wrap">
+      <div class="text_box">
+        <h1 class="title">403 (Forbidden)</h1>
+        <p class="text en">You don't have permission to access/on this server.</p>
+      </div>
+      <div class="img_box">
+        <!-- 에러 이미지 -->
+        <img src="/errors/img/error.gif" alt="" class="img">
+      </div>
+    </div>
+
+    <div class="banner_panel">
+      <div class="banner_area">
+        <div class="lang_box">
+          ⓒxxx Inc., All rights reserved.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

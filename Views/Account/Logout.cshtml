@@ -1,0 +1,13 @@
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+  //var auth = ViewData["authxxxInfo"] as xxx.Models.LoginInformation;
+  //var auth = ViewData["authxxxInfo"];
+}
+
+<script>
+  localStorage.removeItem('token');
+  localStorage.removeItem('roles');
+  window.location.href = '/';
+</script>

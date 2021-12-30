@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+  //var auth = ViewData["authxxxInfo"] as xxx.Models.LoginInformation;
+  var auth = ViewData["authxxxInfo"];
+}
+
+<script>
+  function decodeToken(token) {
+	  var playload = JSON.parse(atob(token.split('.')[1]));
+    @* window.localStorage.setItem('systemId', playload.systemId);
+    window.localStorage.setItem('userId', playload.userId);
+    window.localStorage.setItem('userName', playload.userName); *@
+    window.localStorage.setItem('roles', playload.roles);
+  };
+  decodeToken('@auth');
+
+  window.localStorage.setItem('token', '@auth');
+  window.location.href = '/';
+</script>
